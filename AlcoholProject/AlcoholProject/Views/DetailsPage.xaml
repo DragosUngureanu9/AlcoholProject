@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" NavigationPage.HasNavigationBar="False"
+             x:Class="AlcoholProject.Views.DetailsPage">
+
+    <Grid Padding="30" BackgroundColor="Black" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Padding="0,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            
+            <StackLayout Spacing="0" HorizontalOptions="End" VerticalOptions="Start">
+                <Label Text="ALCOHOL" TextColor="White" FontFamily="ThemeFont" FontSize="30" HorizontalOptions="End"/>
+                <Label Text="DRINKS" TextColor="White" Opacity="0.5" FontFamily="LightFont" FontSize="18" HorizontalOptions="End"/>
+            </StackLayout>
+        </Grid>
+        <ScrollView Grid.Row="1" HorizontalOptions="FillAndExpand">
+            <Grid RowSpacing="50" HorizontalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackLayout Spacing="0" HorizontalOptions="Center" VerticalOptions="Start">
+                    <Label Text="{Binding SelectedAlcohol.Price, StringFormat='{0} RON'}" TextColor="White" 
+                           FontFamily="ThemeFont" FontSize="30" HorizontalOptions="Center" Opacity="0.70"/>
+                    <Label Text="Drink now, regret later!" TextColor="White" Opacity="0.75" FontFamily="LightFont" FontSize="16" FontAttributes="Bold" HorizontalOptions="Center"/>
+                </StackLayout>
+                <CarouselView Grid.Row="1" ItemsSource="{Binding Alcohols}" HeightRequest="260" HorizontalOptions="FillAndExpand" 
+                          CurrentItem="{Binding SelectedAlcohol}" IsScrollAnimated="True" IsSwipeEnabled="True">
+                    <CarouselView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid HorizontalOptions="FillAndExpand">
+                                <Label Text="{Binding Name}" TextColor="White" FontSize="47" FontFamily="ThemeFont" HorizontalOptions="Center"/>
+                                <Image Source="{Binding Image}" Aspect="Fill" Margin="0,-50,0,0" HeightRequest="200" 
+                                       WidthRequest="235" HorizontalOptions="Center" VerticalOptions="End"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CarouselView.ItemTemplate>
+                </CarouselView>
+                <ImageButton Grid.Row="1" Source="left.png" Margin="15,50,0,0" Aspect="Fill" HeightRequest="18" WidthRequest="18" HorizontalOptions="Start" 
+                         VerticalOptions="Center" BackgroundColor="White" Command="{Binding ChangePositionCommand}" CommandParameter="L"/>
+                <ImageButton Grid.Row="1" Source="right.png" Margin="0,50,15,0" Aspect="Fill" HeightRequest="18" WidthRequest="18" HorizontalOptions="End" 
+                         VerticalOptions="Center" BackgroundColor="White" Command="{Binding ChangePositionCommand}" CommandParameter="R"/>
+                <StackLayout Grid.Row="2" Spacing="20" HorizontalOptions="FillAndExpand">
+                    <Label Text="{Binding SelectedAlcohol.Name, StringFormat='{0}'}" TextColor="White" 
+                           FontFamily="ThemeFont" FontSize="25" HorizontalOptions="End"/>
+                    <BoxView BackgroundColor="White" HeightRequest="2" WidthRequest="45" VerticalOptions="Start" 
+                             HorizontalOptions="End"/>
+                    <Label Text="{Binding SelectedAlcohol.Description}" TextColor="White" WidthRequest="250" 
+                           FontFamily="LightFont" FontSize="12" HorizontalOptions="End" HorizontalTextAlignment="End"/>
+                    <Button Text="Buy here!" TextColor="Black" Padding="20,5" HeightRequest="35" CornerRadius="17" 
+                            BackgroundColor="White" FontFamily="ThemeFont" HorizontalOptions="End"/>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
+    </Grid>
+</ContentPage>
